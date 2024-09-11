@@ -1,0 +1,26 @@
+name: Run Node.js Script
+
+on:
+  push:
+    branches:
+      - main  # تشغيل الوركفلو عند الدفع (push) لفرع "main"
+  workflow_dispatch:  # يتيح لك تشغيل الوركفلو يدويًا من GitHub
+
+jobs:
+  run_node_script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # جلب ملفات المشروع
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'  # تحديد إصدار Node.js
+
+      - name: Install dependencies
+        run: npm install  # تثبيت الحزم
+
+      - name: Run Node.js script
+        run: node index.js  # تشغيل ملف index.js
